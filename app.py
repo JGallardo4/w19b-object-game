@@ -13,7 +13,7 @@ print("Try to get to the end! Good Luck!")
 print("-----------------------------")
 
 board = GameBoard()
-player = Player(3, 2)
+player = Player(9, 11)
 playerMover = PlayerMover(player, board)
 
 while True:
@@ -24,6 +24,7 @@ while True:
     playerMover.movePlayer(selection)
 
     if(board.checkWin(player.rowPosition, player.columnPosition)):
+        board.printBoard(player.rowPosition, player.columnPosition)
         print("You win!")
         quit()
     

@@ -18,12 +18,24 @@ class GameBoard:
             self.createRow([1, 3]),
             self.createRow([3]),
         ]
+        self.coins = [
+            [1, 7],
+            [3, 6],
+            [3, 9],
+            [5, 10],
+            [8, 1],
+            [8, 11],
+            [9, 9],
+            [10, 1]
+        ]
 
     def printBoard(self, playerRow, playerColumn):
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
                 if i == playerRow and j == playerColumn:
                     print(" P ", end="")
+                elif [i, j] in self.coins:
+                    print(" 0 ", end="")
                 else:
                     print(self.board[i][j], end="")
             print("")
@@ -46,4 +58,9 @@ class GameBoard:
             else:
                 result.append("   ")
         return result
-
+    
+    def checkCoin(self, checkRow, checkCol):
+        return [checkRow, checkCol] in self.coins
+    
+    def removeCoin(self, row, col):
+        self.coins.remove([row, col])

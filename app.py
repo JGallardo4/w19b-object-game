@@ -18,7 +18,7 @@ playerMover = PlayerMover(player, board)
 
 while True:
     board.printBoard(player.rowPosition, player.columnPosition)
-    print(player.rowPosition, player.columnPosition)
+    print("Coins: ", player.coins)
     selection = input("Make a move: ")
 
     playerMover.movePlayer(selection)
@@ -27,5 +27,9 @@ while True:
         board.printBoard(player.rowPosition, player.columnPosition)
         print("You win!")
         quit()
+    
+    if(board.checkCoin(player.rowPosition, player.columnPosition)):
+        player.getCoin()
+        board.removeCoin(player.rowPosition, player.columnPosition)
     
     # Check if the player has won, if so print a message and break the loop!

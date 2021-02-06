@@ -22,5 +22,9 @@ while True:
     selection = input("Make a move: ")
 
     playerMover.movePlayer(selection)
+
+    if(board.checkWin(player.rowPosition, player.columnPosition)):
+        print("You win!")
+        quit()
     
     # Check if the player has won, if so print a message and break the loop!

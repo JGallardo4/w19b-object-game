@@ -1,6 +1,5 @@
 from gameboard import GameBoard
-from player import Player
-from utils import PlayerMover
+import sprites
 
 print("Welcome to the game!")
 print("Instructions: ")
@@ -13,23 +12,26 @@ print("Try to get to the end! Good Luck!")
 print("-----------------------------")
 
 board = GameBoard()
-player = Player(9, 11)
-playerMover = PlayerMover(player, board)
 
 while True:
-    board.printBoard(player.rowPosition, player.columnPosition)
-    print("Coins: ", player.coins)
-    selection = input("Make a move: ")
-
-    playerMover.movePlayer(selection)
-
-    if(board.checkWin(player.rowPosition, player.columnPosition)):
-        board.printBoard(player.rowPosition, player.columnPosition)
-        print("You win!")
+    board.moveEnemies()
+    if(board.checkEnemy()):
+        print("You got bit by a venomous snake. You lose.")
+        print("Score: 0")
         quit()
     
-    if(board.checkCoin(player.rowPosition, player.columnPosition)):
-        player.getCoin()
-        board.removeCoin(player.rowPosition, player.columnPosition)
+    board.printBoard()
+    print("Coins: ", board.player.coins)
+    selection = input("Make a move: ")    
+
+    if(board.checkWin()):
+        board.printBoard()
+        print("You win!")
+        print("Score: ", board.player.coins)
+        quit()
     
-    # Check if the player has won, if so print a message and break the loop!
+    if(board.checkCoin()):
+        board.player.getCoin()
+        board.removeCoin()  
+    
+    board.movePlayer(selection)  
